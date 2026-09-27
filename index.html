@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Benjamin Novofastovsky</title>
+<meta name="description" content="Mechanical engineering student at Binghamton University. FSAE steering, UAV payloads, 3D printers, and playful music projects for the browser.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --paper:#ECEFEA; --sheet:#F6F7F3; --ink:#18202B; --ink-2:#4A5563; --rule:#C3CBC6; --grid:rgba(24,32,43,.06);
+  --accent:#2446C9; --accent-ink:#fff;
+  --display:"Archivo","Arial Narrow",system-ui,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#0F131A; --sheet:#151A22; --ink:#E3E7E4; --ink-2:#98A2AE; --rule:#2B333F; --grid:rgba(227,231,228,.045);
+  --accent:#8DA4FF; --accent-ink:#0F131A; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --paper:#0F131A; --sheet:#151A22; --ink:#E3E7E4; --ink-2:#98A2AE; --rule:#2B333F; --grid:rgba(227,231,228,.045);
+  --accent:#8DA4FF; --accent-ink:#0F131A; color-scheme:dark;}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.6 var(--body);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:24px 24px;padding-inline:clamp(16px,4vw,48px);padding-block:clamp(16px,4vw,48px)}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.sheet{max-width:1120px;margin:0 auto;background:var(--sheet);border:1.5px solid var(--ink);position:relative}
+.sheet::before{content:"";position:absolute;inset:6px;border:.5px solid var(--rule);pointer-events:none}
+.label{font:500 11px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2)}
+
+/* hero */
+.hero{position:relative;border-bottom:1.5px solid var(--ink);overflow:hidden}
+#mesh{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hero-in{position:relative;padding:clamp(28px,6vw,72px) clamp(20px,5vw,56px) clamp(24px,4vw,40px);pointer-events:none}
+.hero-in a{pointer-events:auto}
+h1{font-family:var(--display);font-variation-settings:"wdth" 125;font-weight:850;font-size:clamp(40px,8.4vw,104px);
+  line-height:.9;letter-spacing:-.02em;margin:10px 0 18px;text-wrap:balance}
+h1 span{display:block;font-variation-settings:"wdth" 62;font-weight:500;letter-spacing:.01em}
+.lede{max-width:56ch;font-size:clamp(16px,1.9vw,19px);color:var(--ink-2);margin:0}
+.lede b{color:var(--ink);font-weight:600}
+.links{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.btn{font:500 13px/1 var(--mono);text-decoration:none;padding:11px 14px;border:1.5px solid var(--ink);background:var(--sheet);display:inline-flex;gap:8px;align-items:center}
+.btn.primary{background:var(--ink);color:var(--sheet)}
+.btn:hover{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+
+/* title block */
+.tblock{display:grid;grid-template-columns:repeat(5,1fr);border-bottom:1.5px solid var(--ink)}
+.tblock div{padding:10px 14px;border-right:.75px solid var(--ink);min-width:0}
+.tblock div:last-child{border-right:0}
+.tblock strong{display:block;font:500 14px/1.35 var(--body);margin-top:2px;overflow-wrap:anywhere}
+@media (max-width:760px){.tblock{grid-template-columns:repeat(2,1fr)}.tblock div{border-bottom:.75px solid var(--ink)}.tblock div:nth-child(2n){border-right:0}.tblock div:last-child{grid-column:1/-1;border-bottom:0}}
+
+section{padding:clamp(28px,5vw,56px) clamp(20px,5vw,56px);border-bottom:.75px solid var(--ink)}
+section:last-of-type{border-bottom:0}
+.sec-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:24px}
+h2{font-family:var(--display);font-variation-settings:"wdth" 110;font-weight:800;font-size:clamp(26px,3.6vw,40px);line-height:1;margin:6px 0 0;text-wrap:balance}
+.sec-head p{margin:0;max-width:44ch;color:var(--ink-2);font-size:15px}
+
+/* projects */
+.projects{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+@media (max-width:720px){.projects{grid-template-columns:1fr}}
+.proj{border:1.5px solid var(--ink);display:flex;flex-direction:column;background:var(--sheet);transition:transform .18s ease,box-shadow .18s ease}
+.proj:hover{transform:translate(-3px,-3px);box-shadow:6px 6px 0 var(--accent)}
+.proj canvas{display:block;width:100%;aspect-ratio:16/8;max-width:100%;border-bottom:1.5px solid var(--ink);background:#0d1118}
+.proj-body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:8px;flex:1}
+.proj-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.proj h3{font-family:var(--display);font-variation-settings:"wdth" 100;font-weight:750;font-size:22px;margin:0;line-height:1.1}
+.proj p{margin:0;color:var(--ink-2);font-size:15px}
+.proj-links{display:flex;gap:16px;margin-top:auto;padding-top:8px;font:500 13px/1 var(--mono)}
+.proj-links a{text-decoration:none;border-bottom:1.5px solid var(--accent);padding-bottom:3px}
+.proj-links a:hover{color:var(--accent)}
+
+/* parts list */
+.bom-wrap{overflow-x:auto;border:1.5px solid var(--ink)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:14.5px}
+th{font:500 11px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);text-align:left;padding:10px 14px;border-bottom:1.5px solid var(--ink);background:var(--paper)}
+td{padding:14px;border-bottom:.75px solid var(--rule);vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.no{font:500 13px var(--mono);color:var(--accent);width:52px;font-variant-numeric:tabular-nums}
+td.part strong{display:block;font-weight:600}
+td.part span{color:var(--ink-2);font-size:14px;display:block;max-width:52ch}
+td.meta{font:400 12.5px/1.5 var(--mono);color:var(--ink-2);white-space:nowrap}
+.chip{display:inline-block;font:500 11px/1 var(--mono);padding:4px 7px;border:1px solid var(--rule);margin:0 4px 4px 0;white-space:nowrap}
+.award{border-color:var(--accent);color:var(--accent)}
+
+/* crews */
+.crews{display:grid;grid-template-columns:repeat(4,1fr);border:1.5px solid var(--ink)}
+.crew{padding:18px;border-right:.75px solid var(--ink);display:flex;flex-direction:column;gap:6px}
+.crew:last-child{border-right:0}
+.crew h3{font-family:var(--display);font-variation-settings:"wdth" 90;font-weight:700;font-size:19px;line-height:1.15;margin:0}
+.crew p{margin:0;font-size:14px;color:var(--ink-2)}
+.crew .big{font-family:var(--display);font-variation-settings:"wdth" 125;font-weight:850;font-size:34px;line-height:1;color:var(--accent);font-variant-numeric:tabular-nums}
+@media (max-width:860px){.crews{grid-template-columns:repeat(2,1fr)}.crew:nth-child(2n){border-right:0}.crew:nth-child(-n+2){border-bottom:.75px solid var(--ink)}}
+@media (max-width:480px){.crews{grid-template-columns:1fr}.crew{border-right:0;border-bottom:.75px solid var(--ink)}.crew:last-child{border-bottom:0}}
+
+/* tools + footer */
+.tools{display:flex;flex-wrap:wrap;gap:8px}
+.tools .chip{font-size:13px;padding:8px 11px;border-color:var(--ink)}
+footer{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;padding:16px clamp(20px,5vw,56px);border-top:1.5px solid var(--ink)}
+.legend{display:flex;align-items:center;gap:10px}
+.legend i{display:block;width:160px;max-width:40vw;height:10px;border:1px solid var(--ink);
+  background:linear-gradient(90deg,#1f3bd6,#1fb6e6,#2fd17a,#f2e33a,#f08a24,#e0322b)}
+.copy{font:400 12px var(--mono);color:var(--ink-2)}
+@media (max-width:560px){footer{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.proj,.proj:hover{transition:none;transform:none}}
+</style>
+</head>
+<body>
+
+<main class="sheet">
+  <header class="hero">
+    <canvas id="mesh" aria-hidden="true"></canvas>
+    <div class="hero-in">
+      <div class="label">Mechanical Engineering · Binghamton University</div>
+      <h1>Benjamin<span>Novofastovsky</span></h1>
+      <p class="lede">I design <b>steering systems for Formula SAE</b>, payload drops for drones, and 3D printers from the frame up. Off the clock I build <b>music toys for the browser</b>. Move your cursor over this header to load the mesh.</p>
+      <div class="links">
+        <a class="btn primary" href="#web">See the web projects ↓</a>
+        <a class="btn" href="https://github.com/GGPS4" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn" href="https://www.linkedin.com/in/benjamin-novofastovsky" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="mailto:bnovofastovs@binghamton.edu">bnovofastovs@binghamton.edu</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="tblock" aria-label="Summary">
+    <div><span class="label">Drawn by</span><strong>B. Novofastovsky</strong></div>
+    <div><span class="label">Discipline</span><strong>B.S. Mechanical Eng.</strong></div>
+    <div><span class="label">Expected</span><strong>May 2028</strong></div>
+    <div><span class="label">Based in</span><strong>Binghamton, NY</strong></div>
+    <div><span class="label">Status</span><strong>Open to Summer 2027 internships</strong></div>
+  </div>
+
+  <section id="web">
+    <div class="sec-head">
+      <div><div class="label">Sheet A · Software</div><h2>Built for the browser</h2></div>
+      <p>Interactive side projects, all live on GitHub Pages. Most of them are about music.</p>
+    </div>
+    <div class="projects">
+      <article class="proj">
+        <canvas data-art="guitar" aria-hidden="true"></canvas>
+        <div class="proj-body">
+          <div class="proj-top"><h3>Six String Museum</h3><span class="label">TypeScript</span></div>
+          <p>A guitar museum in your browser with a 50-lesson Guitar Teacher, a workshop, a pedalboard and games.</p>
+          <div class="proj-links"><a href="https://ggps4.github.io/six-string-museum/" target="_blank" rel="noopener">Open live ↗</a><a href="https://github.com/GGPS4/six-string-museum" target="_blank" rel="noopener">Source</a></div>
+        </div>
+      </article>
+      <article class="proj">
+        <canvas data-art="city" aria-hidden="true"></canvas>
+        <div class="proj-body">
+          <div class="proj-top"><h3>Musical City</h3><span class="label">TypeScript</span></div>
+          <p>Your music taste as an explorable 3D city, with genre districts, venues, record stores and real music-history landmarks.</p>
+          <div class="proj-links"><a href="https://ggps4.github.io/musical-city/" target="_blank" rel="noopener">Open live ↗</a><a href="https://github.com/GGPS4/musical-city" target="_blank" rel="noopener">Source</a></div>
+        </div>
+      </article>
+      <article class="proj">
+        <canvas data-art="stars" aria-hidden="true"></canvas>
+        <div class="proj-body">
+          <div class="proj-top"><h3>Constellation Maker</h3><span class="label">JavaScript</span></div>
+          <p>Place stars in the night sky, let fate connect them, and record your constellation's legend on antique parchment.</p>
+          <div class="proj-links"><a href="https://ggps4.github.io/constellation-maker/" target="_blank" rel="noopener">Open live ↗</a><a href="https://github.com/GGPS4/constellation-maker" target="_blank" rel="noopener">Source</a></div>
+        </div>
+      </article>
+      <article class="proj">
+        <canvas data-art="aux" aria-hidden="true"></canvas>
+        <div class="proj-body">
+          <div class="proj-top"><h3>Aux Control</h3><span class="label">JavaScript</span></div>
+          <p>Lets friends queue and control the Spotify playing on my Alexa, so nobody has to fight over the aux cord.</p>
+          <div class="proj-links"><a href="https://ggps4.github.io/aux-control/" target="_blank" rel="noopener">Open live ↗</a><a href="https://github.com/GGPS4/aux-control" target="_blank" rel="noopener">Source</a></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="hardware">
+    <div class="sec-head">
+      <div><div class="label">Sheet B · Hardware</div><h2>Parts list</h2></div>
+      <p>Engineering work in teams, shops and hangars.</p>
+    </div>
+    <div class="bom-wrap">
+      <table>
+        <thead><tr><th>Item</th><th>Part</th><th>Where</th><th>Tools</th></tr></thead>
+        <tbody>
+          <tr><td class="no">001</td><td class="part"><strong>Formula SAE steering system</strong><span>Designed the car's steering system for precise handling and driver feedback, and worked with the suspension team on geometry and packaging.</span></td><td class="meta">Binghamton FSAE<br>Oct 2024 – now</td><td><span class="chip">ANSYS</span><span class="chip">Fusion 360</span><span class="chip">MATLAB</span></td></tr>
+          <tr><td class="no">002</td><td class="part"><strong>UAV payload delivery mechanism</strong><span>Modeled and refined the payload deployment hardware for a competition drone, tuning for weight, reliability and parachute release accuracy.</span></td><td class="meta">Binghamton UAV<br>Feb 2025 – now</td><td><span class="chip">Fusion 360</span><span class="chip">MATLAB</span></td></tr>
+          <tr><td class="no">003</td><td class="part"><strong>Turbocharged engine install, composite airframe parts</strong><span>Helped design and install a turbo on a modified engine, laid up fiberglass and carbon fiber parts, and kept the foam CNC running.</span></td><td class="meta">Veloce Planes, NC<br>Summer 2024</td><td><span class="chip">Composites</span><span class="chip">CNC</span></td></tr>
+          <tr><td class="no">004</td><td class="part"><strong>VORON printers and a rubber-fabric printer</strong><span>Built VORON Zero, Switchwire and Trident printers, then designed custom machines that print rubber fabric for clothing.</span></td><td class="meta">Rav Meidmad 3D, Israel<br>Summer 2022</td><td><span class="chip">3D printing</span><span class="chip">Calibration</span></td></tr>
+          <tr><td class="no">005</td><td class="part"><strong>Text-adventure tower</strong><span>Custom wiring and an interactive tower that plays along with a story-based Arduino game.</span></td><td class="meta">Watson Arduino Expo<br>Fall 2024</td><td><span class="chip">Arduino</span><span class="chip award">Best Presentation</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="leadership">
+    <div class="sec-head">
+      <div><div class="label">Sheet C · Leadership</div><h2>Crews I run</h2></div>
+    </div>
+    <div class="crews">
+      <div class="crew"><span class="big">20+</span><h3>President, BUSIM</h3><p>Simulation and Interface Mechanics Team. I run the e-board and both the business and engineering sides.</p></div>
+      <div class="crew"><span class="big">45+</span><h3>2nd Lt, Civil Air Patrol</h3><p>Former cadet commander of the Curtiss-Wright Composite Squadron, leading training and operations.</p></div>
+      <div class="crew"><span class="big">2</span><h3>Fortnite Coordinator, BVGA</h3><p>Two semifinal-qualifying teams, with training plans and practice schedules I built.</p></div>
+      <div class="crew"><span class="big">4 yrs</span><h3>Lifeguard, YMCA</h3><p>Lifeguard and swim instructor in Livingston, NJ since 2022.</p></div>
+    </div>
+  </section>
+
+  <section id="tools">
+    <div class="sec-head"><div><div class="label">Sheet D · Toolbox</div><h2>What I work in</h2></div></div>
+    <div class="tools">
+      <span class="chip">SOLIDWORKS</span><span class="chip">Fusion 360</span><span class="chip">ANSYS Workbench</span><span class="chip">MATLAB</span><span class="chip">C++</span><span class="chip">JavaScript</span><span class="chip">TypeScript</span><span class="chip">Arduino</span><span class="chip">Composites layup</span><span class="chip">CNC</span><span class="chip">3D printer builds</span>
+    </div>
+  </section>
+
+  <footer>
+    <div class="legend"><span class="label">Load</span><i></i><span class="label">Max stress</span></div>
+    <div class="copy">Sheet 1 of 1 · Rev A · 2026</div>
+  </footer>
+</main>
+
+<script>
+(function(){
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function cmap(t){ // ANSYS-style legend
+    const s=[[31,59,214],[31,182,230],[47,209,122],[242,227,58],[240,138,36],[224,50,43]];
+    t=Math.max(0,Math.min(1,t))*(s.length-1); const i=Math.min(s.length-2,Math.floor(t)), f=t-i;
+    return s[i].map((v,k)=>Math.round(v+(s[i+1][k]-v)*f));
+  }
+  function css(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim();}
+
+  // Hero FEA mesh
+  const cv=document.getElementById('mesh'), hero=cv.parentElement, ctx=cv.getContext('2d');
+  let W,H,dpr, mx=-9999,my=-9999, load=0, target=0;
+  function size(){dpr=Math.min(2,devicePixelRatio||1);W=hero.clientWidth;H=hero.clientHeight;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);draw();}
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    const step=W<600?28:36, R=Math.max(160,W*.2), ink=css('--rule');
+    const cols=Math.ceil(W/step)+1, rows=Math.ceil(H/step)+1, P=[];
+    for(let j=0;j<rows;j++){P[j]=[];for(let i=0;i<cols;i++){
+      let x=i*step+(j%2?step/2:0)-step/2, y=j*step; const dx=x-mx, dy=y-my, d=Math.hypot(dx,dy);
+      const s=load*Math.max(0,1-d/R); x+=dx/(d||1)*s*s*14; y+=dy/(d||1)*s*s*14; P[j][i]=[x,y,s];}}
+    ctx.lineWidth=.75;
+    for(let j=0;j<rows-1;j++)for(let i=0;i<cols-1;i++){
+      const a=P[j][i], b=P[j][i+1], c=P[j+1][j%2?i+1:i];
+      const s=(a[2]+b[2]+c[2])/3;
+      ctx.beginPath();ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);ctx.lineTo(c[0],c[1]);ctx.closePath();
+      if(s>.02){const [r,g,bb]=cmap(s);ctx.fillStyle=`rgba(${r},${g},${bb},${.06+s*.32})`;ctx.fill();}
+      ctx.strokeStyle=ink;ctx.stroke();
+    }
+    if(load>.05&&mx>0){ctx.font='500 11px "IBM Plex Mono",monospace';ctx.fillStyle=css('--ink-2');
+      ctx.fillText(`σ max ${(load*412).toFixed(0)} MPa`,mx+14,my-14);}
+  }
+  function loop(){load+=(target-load)*.12;draw();if(Math.abs(target-load)>.002)requestAnimationFrame(loop);}
+  hero.addEventListener('pointermove',e=>{const r=hero.getBoundingClientRect();mx=e.clientX-r.left;my=e.clientY-r.top;target=1;if(reduce){load=1;draw();}else requestAnimationFrame(loop);});
+  hero.addEventListener('pointerleave',()=>{target=0;if(reduce){load=0;draw();}else requestAnimationFrame(loop);});
+  addEventListener('resize',size); size();
+  if(document.fonts) document.fonts.ready.then(size);
+
+  // Project thumbnails
+  function rnd(seed){return()=>{seed=(seed*16807)%2147483647;return(seed-1)/2147483646;};}
+  const arts={
+    guitar(c,w,h){const g=c.createLinearGradient(0,0,w,0);g.addColorStop(0,'#3a2414');g.addColorStop(1,'#6b4222');c.fillStyle=g;c.fillRect(0,0,w,h);
+      for(let f=1;f<9;f++){const x=w*f/9;c.fillStyle='#cfc6b4';c.fillRect(x,0,3,h);}
+      [3,5,7].forEach(f=>{c.fillStyle='#efe6d2';c.beginPath();c.arc(w*(f-.5)/9,h/2,6,0,7);c.fill();});
+      for(let s=0;s<6;s++){const y=h*(.18+s*.128);c.strokeStyle=s<3?'#e9e4da':'#c8a76a';c.lineWidth=1+s*.5;c.beginPath();
+        for(let x=0;x<=w;x+=4){c.lineTo(x,y+Math.sin(x*.05+s)*(s==2?5:0));}c.stroke();}},
+    city(c,w,h){c.fillStyle='#121829';c.fillRect(0,0,w,h);const r=rnd(7);const hues=['#e0322b','#f2e33a','#1fb6e6','#2fd17a','#b36bff'];
+      for(let row=0;row<3;row++){let x=-10;while(x<w){const bw=18+r()*34,bh=(.2+r()*.55)*h*(1-row*.2),y=h-bh*(1-row*.15)-row*6;
+        c.fillStyle=row==2?'#2a3450':row==1?'#20283f':'#1a2135';if(row==2)c.fillStyle='#2b3552';c.fillRect(x,y,bw,h);
+        if(row==2){c.fillStyle=hues[Math.floor(r()*5)];for(let wy=y+8;wy<h-6;wy+=10)for(let wx=x+4;wx<x+bw-6;wx+=8)if(r()>.55)c.fillRect(wx,wy,3,4);}
+        x+=bw+2;}}},
+    stars(c,w,h){const g=c.createRadialGradient(w*.5,h*1.2,10,w*.5,h*.4,w);g.addColorStop(0,'#1d2a55');g.addColorStop(1,'#07091a');c.fillStyle=g;c.fillRect(0,0,w,h);
+      const r=rnd(42);for(let i=0;i<160;i++){c.fillStyle=`rgba(255,255,255,${.2+r()*.6})`;c.fillRect(r()*w,r()*h,1.2,1.2);}
+      const pts=[[.18,.62],[.3,.38],[.44,.46],[.56,.24],[.7,.36],[.8,.6],[.62,.7]].map(p=>[p[0]*w,p[1]*h]);
+      c.strokeStyle='rgba(233,210,150,.7)';c.lineWidth=1.2;c.beginPath();pts.forEach((p,i)=>i?c.lineTo(p[0],p[1]):c.moveTo(p[0],p[1]));c.stroke();
+      pts.forEach(p=>{c.fillStyle='#fff3cf';c.beginPath();c.arc(p[0],p[1],3,0,7);c.fill();c.fillStyle='rgba(255,236,180,.18)';c.beginPath();c.arc(p[0],p[1],9,0,7);c.fill();});},
+    aux(c,w,h){c.fillStyle='#0f1512';c.fillRect(0,0,w,h);const n=40,bw=w/n,r=rnd(3);
+      for(let i=0;i<n;i++){const v=.15+Math.abs(Math.sin(i*.37))*.5+r()*.3,bh=v*h*.7;c.fillStyle=`rgb(${cmap(v).join(',')})`;c.fillRect(i*bw+1,h/2-bh/2,bw-2,bh);}
+      c.fillStyle='rgba(15,21,18,.75)';c.fillRect(0,h-34,w,34);c.fillStyle='#d9e6de';c.font='500 12px "IBM Plex Mono",monospace';c.fillText('▶ queued by: 3 friends',14,h-13);}
+  };
+  function paintThumbs(){document.querySelectorAll('canvas[data-art]').forEach(el=>{const d=Math.min(2,devicePixelRatio||1),w=el.clientWidth,h=el.clientHeight;
+    el.width=w*d;el.height=h*d;const c=el.getContext('2d');c.setTransform(d,0,0,d,0,0);arts[el.dataset.art](c,w,h);});}
+  paintThumbs(); addEventListener('resize',paintThumbs);
+})();
+</script>
+</body>
+</html>
