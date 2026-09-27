@@ -139,9 +139,25 @@ footer{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;p
   <section id="web">
     <div class="sec-head">
       <div><div class="label">Sheet A · Software</div><h2>Built for the browser</h2></div>
-      <p>Interactive side projects, all live on GitHub Pages. Most of them are about music.</p>
+      <p>Interactive projects, all live on GitHub Pages. Engineering tools first, then the music toys.</p>
     </div>
     <div class="projects">
+      <article class="proj">
+        <canvas data-art="steer" aria-hidden="true"></canvas>
+        <div class="proj-body">
+          <div class="proj-top"><h3>Steering Sandbox</h3><span class="label">JavaScript</span></div>
+          <p>Import FSAE hardpoints from Fusion 360 and see Ackermann, scrub radius, KPI, caster and bump steer. Drag the tie rods and compare against your CAD.</p>
+          <div class="proj-links"><a href="https://ggps4.github.io/steering-sandbox/" target="_blank" rel="noopener">Open live ↗</a><a href="https://github.com/GGPS4/steering-sandbox" target="_blank" rel="noopener">Source</a></div>
+        </div>
+      </article>
+      <article class="proj">
+        <canvas data-art="scrim" aria-hidden="true"></canvas>
+        <div class="proj-body">
+          <div class="proj-top"><h3>Scrim Planner</h3><span class="label">JavaScript</span></div>
+          <p>The tool I use to run BVGA's Fortnite teams: weekly points against the qualifying line, drops and rotations, and the practice week.</p>
+          <div class="proj-links"><a href="https://ggps4.github.io/scrim-planner/" target="_blank" rel="noopener">Open live ↗</a><a href="https://github.com/GGPS4/scrim-planner" target="_blank" rel="noopener">Source</a></div>
+        </div>
+      </article>
       <article class="proj">
         <canvas data-art="guitar" aria-hidden="true"></canvas>
         <div class="proj-body">
@@ -262,6 +278,15 @@ footer{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;p
   // Project thumbnails
   function rnd(seed){return()=>{seed=(seed*16807)%2147483647;return(seed-1)/2147483646;};}
   const arts={
+    steer(c,w,h){c.fillStyle='#0f1622';c.fillRect(0,0,w,h);c.strokeStyle='rgba(120,150,200,.12)';c.lineWidth=1;for(let x=0;x<w;x+=16){c.beginPath();c.moveTo(x,0);c.lineTo(x,h);c.stroke();}for(let y=0;y<h;y+=16){c.beginPath();c.moveTo(0,y);c.lineTo(w,y);c.stroke();}
+      const cy=h*.42,tw=w*.62,L=w/2-tw/2,R=w/2+tw/2,ang=[.34,.24];c.strokeStyle='#e6ebf2';c.lineWidth=4;c.beginPath();c.moveTo(L+18,cy+18);c.lineTo(R-18,cy+18);c.stroke();
+      [[L,ang[0]],[R,ang[1]]].forEach(([x,a],i)=>{c.save();c.translate(x,cy);c.rotate(-a);c.fillStyle='#39455a';c.fillRect(-9,-32,18,64);c.restore();
+        c.strokeStyle='#7ea2ff';c.setLineDash([5,4]);c.lineWidth=1.3;c.beginPath();c.moveTo(x,cy);c.lineTo(x-Math.cos(a)*w,cy+Math.sin(a)*w*(i?1.35:1.0)*.9);c.stroke();c.setLineDash([]);});
+      c.strokeStyle='#e6ebf2';c.lineWidth=1.5;c.beginPath();c.moveTo(20,h-18);c.lineTo(w-20,h-18);c.stroke();c.fillStyle='#9fb2d0';c.font='500 11px "IBM Plex Mono",monospace';c.fillText('ACKERMANN 102%',14,20);},
+    scrim(c,w,h){c.fillStyle='#10161a';c.fillRect(0,0,w,h);const A=[47,52,50,58,55,61,53,56],B=[55,51,60,54,62,57,58,59],X=i=>24+i*(w-60)/7,Y=v=>h-22-(v-42)/(66-42)*(h-44);
+      c.strokeStyle='#f59e0b';c.setLineDash([5,4]);c.beginPath();c.moveTo(16,Y(50));c.lineTo(w-16,Y(50));c.stroke();c.setLineDash([]);
+      [[B,'#8f80f5'],[A,'#2fa879']].forEach(([d,col])=>{c.strokeStyle=col;c.lineWidth=2.5;c.beginPath();d.forEach((v,i)=>i?c.lineTo(X(i),Y(v)):c.moveTo(X(i),Y(v)));c.stroke();d.forEach((v,i)=>{c.fillStyle=col;c.beginPath();c.arc(X(i),Y(v),3.5,0,7);c.fill();});});
+      c.fillStyle='#c9d4cf';c.font='500 11px "IBM Plex Mono",monospace';c.fillText('BVGA · PTS / WEEK',14,20);},
     guitar(c,w,h){const g=c.createLinearGradient(0,0,w,0);g.addColorStop(0,'#3a2414');g.addColorStop(1,'#6b4222');c.fillStyle=g;c.fillRect(0,0,w,h);
       for(let f=1;f<9;f++){const x=w*f/9;c.fillStyle='#cfc6b4';c.fillRect(x,0,3,h);}
       [3,5,7].forEach(f=>{c.fillStyle='#efe6d2';c.beginPath();c.arc(w*(f-.5)/9,h/2,6,0,7);c.fill();});
