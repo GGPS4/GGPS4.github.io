@@ -108,6 +108,34 @@ footer{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;p
 .copy{font:400 12px var(--mono);color:var(--ink-2)}
 @media (max-width:560px){footer{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){.proj,.proj:hover{transition:none;transform:none}}
+
+/* clickable details */
+.more{font:500 12px/1 var(--mono);color:var(--accent);font-style:normal;text-decoration:underline;text-underline-offset:3px}
+.proj{cursor:pointer}
+.proj:focus-visible,tr[data-detail]:focus-visible,.crew:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.proj-links .more{margin-right:auto}
+tr[data-detail]{cursor:pointer}
+tr[data-detail]:hover td{background:color-mix(in srgb,var(--accent) 7%,transparent)}
+td.part .more{display:inline-block;margin-top:6px}
+button.crew{font:inherit;color:inherit;text-align:left;background:none;border:0;border-right:.75px solid var(--ink);cursor:pointer;align-items:flex-start}
+button.crew:last-child{border-right:0}
+button.crew:hover{background:color-mix(in srgb,var(--accent) 7%,transparent)}
+button.crew .more{margin-top:auto;padding-top:6px}
+@media (max-width:860px){button.crew:nth-child(2n){border-right:0}}
+@media (max-width:480px){button.crew{border-right:0}}
+dialog#dlg{border:1.5px solid var(--ink);background:var(--sheet);color:var(--ink);padding:0;width:min(640px,calc(100vw - 32px));max-height:min(86vh,760px)}
+dialog#dlg::backdrop{background:rgba(10,14,20,.55)}
+.dlg-in{padding:22px 24px 24px;display:flex;flex-direction:column;gap:14px}
+.dlg-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;border-bottom:1px solid var(--ink);padding-bottom:12px}
+.dlg-head h2{margin:4px 0 4px;font-size:clamp(24px,4vw,32px)}
+.dlg-meta{font:400 13px var(--mono);color:var(--ink-2)}
+.dlg-x{font:400 26px/1 var(--body);background:none;border:1.5px solid var(--ink);color:var(--ink);width:38px;height:38px;cursor:pointer;flex:none}
+.dlg-x:hover{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+#dlgBody h3{font:500 11px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);margin:6px 0 4px}
+#dlgBody p{margin:0 0 10px;max-width:62ch}
+#dlgBody ul{margin:0 0 10px;padding-left:18px}
+#dlgBody li{margin-bottom:4px}
+#dlgBody .dlg-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
 </style>
 </head>
 <body>
@@ -118,9 +146,10 @@ footer{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;p
     <div class="hero-in">
       <div class="label">Mechanical Engineering · Binghamton University</div>
       <h1>Benjamin<span>Novofastovsky</span></h1>
-      <p class="lede">I design <b>steering systems for Formula SAE</b>, payload drops for drones, and 3D printers from the frame up. Off the clock I build <b>music toys for the browser</b>. Move your cursor over this header to load the mesh.</p>
+      <p class="lede">I design <b>steering systems for Formula SAE</b>, payload drops for drones, and 3D printers from the frame up. I also write the <b>MATLAB models and web tools</b> my teams use. Move your cursor over this header to load the mesh.</p>
       <div class="links">
-        <a class="btn primary" href="#web">See the web projects ↓</a>
+        <a class="btn primary" href="Benjamin_Novofastovsky_Resume.pdf" target="_blank" rel="noopener">Resume (PDF) ↗</a>
+        <a class="btn" href="#web">Projects ↓</a>
         <a class="btn" href="https://github.com/GGPS4" target="_blank" rel="noopener">GitHub</a>
         <a class="btn" href="https://www.linkedin.com/in/benjamin-novofastovsky" target="_blank" rel="noopener">LinkedIn</a>
         <a class="btn" href="mailto:bnovofastovs@binghamton.edu">bnovofastovs@binghamton.edu</a>
@@ -138,56 +167,40 @@ footer{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;p
 
   <section id="web">
     <div class="sec-head">
-      <div><div class="label">Sheet A · Software</div><h2>Built for the browser</h2></div>
-      <p>Interactive projects, all live on GitHub Pages. Engineering tools first, then the music toys.</p>
+      <div><div class="label">Sheet A · Software &amp; analysis</div><h2>Models and tools</h2></div>
+      <p>Code I wrote for my teams. Click any project to read what it is and what I did.</p>
     </div>
     <div class="projects">
-      <article class="proj">
+      <article class="proj" data-detail="steer" tabindex="0" role="button" aria-label="About Steering Sandbox">
         <canvas data-art="steer" aria-hidden="true"></canvas>
         <div class="proj-body">
           <div class="proj-top"><h3>Steering Sandbox</h3><span class="label">JavaScript</span></div>
           <p>Import FSAE hardpoints from Fusion 360 and see Ackermann, scrub radius, KPI, caster and bump steer. Drag the tie rods and compare against your CAD.</p>
-          <div class="proj-links"><a href="https://ggps4.github.io/steering-sandbox/" target="_blank" rel="noopener">Open live ↗</a><a href="https://github.com/GGPS4/steering-sandbox" target="_blank" rel="noopener">Source</a></div>
+          <div class="proj-links"><span class="more">Read more</span><a href="https://ggps4.github.io/steering-sandbox/" target="_blank" rel="noopener">Open live ↗</a><a href="https://github.com/GGPS4/steering-sandbox" target="_blank" rel="noopener">Source</a></div>
         </div>
       </article>
-      <article class="proj">
+      <article class="proj" data-detail="chute" tabindex="0" role="button" aria-label="About BUAV Parachute Model">
+        <canvas data-art="chute" aria-hidden="true"></canvas>
+        <div class="proj-body">
+          <div class="proj-top"><h3>BUAV Parachute Model</h3><span class="label">MATLAB</span></div>
+          <p>Sizes the drone's payload parachutes and simulates inflation, opening shock and wind drift to find the highest safe opening altitude for a 50 ft landing zone.</p>
+          <div class="proj-links"><span class="more">Read more</span><a href="https://github.com/GGPS4/buav-parachute" target="_blank" rel="noopener">Code ↗</a></div>
+        </div>
+      </article>
+      <article class="proj" data-detail="scrim" tabindex="0" role="button" aria-label="About Scrim Planner">
         <canvas data-art="scrim" aria-hidden="true"></canvas>
         <div class="proj-body">
           <div class="proj-top"><h3>Scrim Planner</h3><span class="label">JavaScript</span></div>
           <p>The tool I use to run BVGA's Fortnite teams: weekly points against the qualifying line, drops and rotations, and the practice week.</p>
-          <div class="proj-links"><a href="https://ggps4.github.io/scrim-planner/" target="_blank" rel="noopener">Open live ↗</a><a href="https://github.com/GGPS4/scrim-planner" target="_blank" rel="noopener">Source</a></div>
+          <div class="proj-links"><span class="more">Read more</span><a href="https://ggps4.github.io/scrim-planner/" target="_blank" rel="noopener">Open live ↗</a><a href="https://github.com/GGPS4/scrim-planner" target="_blank" rel="noopener">Source</a></div>
         </div>
       </article>
-      <article class="proj">
-        <canvas data-art="guitar" aria-hidden="true"></canvas>
-        <div class="proj-body">
-          <div class="proj-top"><h3>Six String Museum</h3><span class="label">TypeScript</span></div>
-          <p>A guitar museum in your browser with a 50-lesson Guitar Teacher, a workshop, a pedalboard and games.</p>
-          <div class="proj-links"><a href="https://ggps4.github.io/six-string-museum/" target="_blank" rel="noopener">Open live ↗</a><a href="https://github.com/GGPS4/six-string-museum" target="_blank" rel="noopener">Source</a></div>
-        </div>
-      </article>
-      <article class="proj">
+      <article class="proj" data-detail="city" tabindex="0" role="button" aria-label="About Musical City">
         <canvas data-art="city" aria-hidden="true"></canvas>
         <div class="proj-body">
           <div class="proj-top"><h3>Musical City</h3><span class="label">TypeScript</span></div>
           <p>Your music taste as an explorable 3D city, with genre districts, venues, record stores and real music-history landmarks.</p>
-          <div class="proj-links"><a href="https://ggps4.github.io/musical-city/" target="_blank" rel="noopener">Open live ↗</a><a href="https://github.com/GGPS4/musical-city" target="_blank" rel="noopener">Source</a></div>
-        </div>
-      </article>
-      <article class="proj">
-        <canvas data-art="stars" aria-hidden="true"></canvas>
-        <div class="proj-body">
-          <div class="proj-top"><h3>Constellation Maker</h3><span class="label">JavaScript</span></div>
-          <p>Place stars in the night sky, let fate connect them, and record your constellation's legend on antique parchment.</p>
-          <div class="proj-links"><a href="https://ggps4.github.io/constellation-maker/" target="_blank" rel="noopener">Open live ↗</a><a href="https://github.com/GGPS4/constellation-maker" target="_blank" rel="noopener">Source</a></div>
-        </div>
-      </article>
-      <article class="proj">
-        <canvas data-art="aux" aria-hidden="true"></canvas>
-        <div class="proj-body">
-          <div class="proj-top"><h3>Aux Control</h3><span class="label">JavaScript</span></div>
-          <p>Lets friends queue and control the Spotify playing on my Alexa, so nobody has to fight over the aux cord.</p>
-          <div class="proj-links"><a href="https://ggps4.github.io/aux-control/" target="_blank" rel="noopener">Open live ↗</a><a href="https://github.com/GGPS4/aux-control" target="_blank" rel="noopener">Source</a></div>
+          <div class="proj-links"><span class="more">Read more</span><a href="https://ggps4.github.io/musical-city/" target="_blank" rel="noopener">Open live ↗</a><a href="https://github.com/GGPS4/musical-city" target="_blank" rel="noopener">Source</a></div>
         </div>
       </article>
     </div>
@@ -196,17 +209,17 @@ footer{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;p
   <section id="hardware">
     <div class="sec-head">
       <div><div class="label">Sheet B · Hardware</div><h2>Parts list</h2></div>
-      <p>Engineering work in teams, shops and hangars.</p>
+      <p>Engineering work in teams, shops and hangars. Click a row for details.</p>
     </div>
     <div class="bom-wrap">
       <table>
         <thead><tr><th>Item</th><th>Part</th><th>Where</th><th>Tools</th></tr></thead>
         <tbody>
-          <tr><td class="no">001</td><td class="part"><strong>Formula SAE steering system</strong><span>Designed the car's steering system for precise handling and driver feedback, and worked with the suspension team on geometry and packaging.</span></td><td class="meta">Binghamton FSAE<br>Oct 2024 – now</td><td><span class="chip">ANSYS</span><span class="chip">Fusion 360</span><span class="chip">MATLAB</span></td></tr>
-          <tr><td class="no">002</td><td class="part"><strong>UAV payload delivery mechanism</strong><span>Modeled and refined the payload deployment hardware for a competition drone, tuning for weight, reliability and parachute release accuracy.</span></td><td class="meta">Binghamton UAV<br>Feb 2025 – now</td><td><span class="chip">Fusion 360</span><span class="chip">MATLAB</span></td></tr>
-          <tr><td class="no">003</td><td class="part"><strong>Turbocharged engine install, composite airframe parts</strong><span>Helped design and install a turbo on a modified engine, laid up fiberglass and carbon fiber parts, and kept the foam CNC running.</span></td><td class="meta">Veloce Planes, NC<br>Summer 2024</td><td><span class="chip">Composites</span><span class="chip">CNC</span></td></tr>
-          <tr><td class="no">004</td><td class="part"><strong>VORON printers and a rubber-fabric printer</strong><span>Built VORON Zero, Switchwire and Trident printers, then designed custom machines that print rubber fabric for clothing.</span></td><td class="meta">Rav Meidmad 3D, Israel<br>Summer 2022</td><td><span class="chip">3D printing</span><span class="chip">Calibration</span></td></tr>
-          <tr><td class="no">005</td><td class="part"><strong>Text-adventure tower</strong><span>Custom wiring and an interactive tower that plays along with a story-based Arduino game.</span></td><td class="meta">Watson Arduino Expo<br>Fall 2024</td><td><span class="chip">Arduino</span><span class="chip award">Best Presentation</span></td></tr>
+          <tr data-detail="fsae" tabindex="0" role="button"><td class="no">001</td><td class="part"><strong>Formula SAE steering system</strong><span>Designed the car's steering system for precise handling and driver feedback, and worked with the suspension team on geometry and packaging.</span><em class="more">Read more</em></td><td class="meta">Binghamton FSAE<br>Oct 2024 – now</td><td><span class="chip">ANSYS</span><span class="chip">Fusion 360</span><span class="chip">MATLAB</span></td></tr>
+          <tr data-detail="buav" tabindex="0" role="button"><td class="no">002</td><td class="part"><strong>UAV payload delivery mechanism</strong><span>Modeled and refined the payload deployment hardware for a competition drone, tuning for weight, reliability and parachute release accuracy.</span><em class="more">Read more</em></td><td class="meta">Binghamton UAV<br>Feb 2025 – now</td><td><span class="chip">Fusion 360</span><span class="chip">MATLAB</span></td></tr>
+          <tr data-detail="veloce" tabindex="0" role="button"><td class="no">003</td><td class="part"><strong>Turbocharged engine install, composite airframe parts</strong><span>Helped design and install a turbo on a modified engine, laid up fiberglass and carbon fiber parts, and kept the foam CNC running.</span><em class="more">Read more</em></td><td class="meta">Veloce Planes, NC<br>Summer 2024</td><td><span class="chip">Composites</span><span class="chip">CNC</span></td></tr>
+          <tr data-detail="voron" tabindex="0" role="button"><td class="no">004</td><td class="part"><strong>VORON printers and a rubber-fabric printer</strong><span>Built VORON Zero, Switchwire and Trident printers, then designed custom machines that print rubber fabric for clothing.</span><em class="more">Read more</em></td><td class="meta">Rav Meidmad 3D, Israel<br>Summer 2022</td><td><span class="chip">3D printing</span><span class="chip">Calibration</span></td></tr>
+          <tr data-detail="arduino" tabindex="0" role="button"><td class="no">005</td><td class="part"><strong>Text-adventure tower</strong><span>Custom wiring and an interactive tower that plays along with a story-based Arduino game.</span><em class="more">Read more</em></td><td class="meta">Watson Arduino Expo<br>Fall 2024</td><td><span class="chip">Arduino</span><span class="chip award">Best Presentation</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -215,12 +228,13 @@ footer{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;p
   <section id="leadership">
     <div class="sec-head">
       <div><div class="label">Sheet C · Leadership</div><h2>Crews I run</h2></div>
+      <p>Click any group to read what it is and what I do there.</p>
     </div>
     <div class="crews">
-      <div class="crew"><span class="big">20+</span><h3>President, BUSIM</h3><p>Simulation and Interface Mechanics Team. I run the e-board and both the business and engineering sides.</p></div>
-      <div class="crew"><span class="big">45+</span><h3>2nd Lt, Civil Air Patrol</h3><p>Former cadet commander of the Curtiss-Wright Composite Squadron, leading training and operations.</p></div>
-      <div class="crew"><span class="big">2</span><h3>Fortnite Coordinator, BVGA</h3><p>Two semifinal-qualifying teams, with training plans and practice schedules I built.</p></div>
-      <div class="crew"><span class="big">4 yrs</span><h3>Lifeguard, YMCA</h3><p>Lifeguard and swim instructor in Livingston, NJ since 2022.</p></div>
+      <button class="crew" type="button" data-detail="busim"><span class="big">60+</span><h3>President, BUSIM</h3><p>Simulation and Interface Mechanics Team. I run the e-board and both the business and engineering sides.</p><em class="more">Read more</em></button>
+      <button class="crew" type="button" data-detail="cap"><span class="big">45+</span><h3>2nd Lt, Civil Air Patrol</h3><p>Former cadet commander of the Curtiss-Wright Composite Squadron, leading training and operations.</p><em class="more">Read more</em></button>
+      <button class="crew" type="button" data-detail="bvga"><span class="big">8</span><h3>Fortnite Coordinator, BVGA</h3><p>8 players across two semifinal-qualifying teams, with training plans and practice schedules I built.</p><em class="more">Read more</em></button>
+      <button class="crew" type="button" data-detail="ymca"><span class="big">4 yrs</span><h3>Lifeguard, YMCA</h3><p>Lifeguard and swim instructor in Livingston, NJ since 2022.</p><em class="more">Read more</em></button>
     </div>
   </section>
 
@@ -235,6 +249,12 @@ footer{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;p
     <div class="legend"><span class="label">Load</span><i></i><span class="label">Max stress</span></div>
     <div class="copy">Sheet 1 of 1 · Rev A · 2026</div>
   </footer>
+  <dialog id="dlg" aria-labelledby="dlgTitle">
+    <div class="dlg-in">
+      <div class="dlg-head"><div><div class="label" id="dlgKicker"></div><h2 id="dlgTitle"></h2><div class="dlg-meta" id="dlgMeta"></div></div><button class="dlg-x" type="button" id="dlgClose" aria-label="Close">×</button></div>
+      <div id="dlgBody"></div>
+    </div>
+  </dialog>
 </main>
 
 <script>
@@ -275,9 +295,87 @@ footer{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;p
   addEventListener('resize',size); size();
   if(document.fonts) document.fonts.ready.then(size);
 
+
+  // ---------- detail dialogs ----------
+  const D={
+    steer:{k:'Software · FSAE',t:'Steering Sandbox',m:'JavaScript · 2026',
+      what:'A browser tool for checking front-steering geometry. It reads the suspension hardpoints of a Formula SAE front corner and solves the linkage through full lock and wheel travel.',
+      did:['Wrote the rigid-body kinematic solver for steering and bump travel','Built an importer for Fusion 360 hardpoints, plus a Fusion Python script that exports named construction points','Report Ackermann %, kingpin inclination, caster, scrub radius, mechanical trail and bump steer, with a live comparison against the CAD baseline'],
+      tools:['JavaScript','Canvas','Fusion 360 API','Vehicle dynamics'],
+      links:[['Open live','https://ggps4.github.io/steering-sandbox/'],['Source','https://github.com/GGPS4/steering-sandbox']]},
+    chute:{k:'Analysis · Binghamton UAV',t:'BUAV Parachute Model',m:'MATLAB · Nov 2025',
+      what:'The MATLAB model behind our drone\'s payload parachutes. It covers two payloads, a strobing beacon (0.155 kg) and a water bottle (0.255 kg), dropped from 160 ft.',
+      did:['Sized the canopy for a 5 m/s landing: 0.41 m minimum for the beacon and 0.53 m for the bottle. We chose one 0.58 m canopy for both','Simulated inflation using ripstop permeability, and opening shock using an NSWC-style inflation curve','Compared canopy sizes from 0.40 to 0.80 m','Swept 0 to 15 mph winds to find the highest opening altitude that still lands inside the 50 ft target radius'],
+      tools:['MATLAB','Symbolic Math','Numerical integration'],
+      links:[['Code and README','https://github.com/GGPS4/buav-parachute']]},
+    scrim:{k:'Software · BVGA',t:'Scrim Planner',m:'JavaScript · 2026',
+      what:'The planning tool I use as Fortnite Coordinator for the Binghamton Video Game Association.',
+      did:['Weekly points tracking for both teams against a qualifying line, with a 4-week trend','Drop and rotation plans, rosters and a shared practice-week calendar','Export and import so the whole team can work from the same plan'],
+      tools:['JavaScript','Canvas charts','localStorage'],
+      links:[['Open live','https://ggps4.github.io/scrim-planner/'],['Source','https://github.com/GGPS4/scrim-planner']]},
+    city:{k:'Software · Personal',t:'Musical City',m:'TypeScript',
+      what:'An explorable 3D city built from your music taste. Genres become districts, with venues, record stores and real music-history landmarks.',
+      did:['Built the 3D scene and the procedural city layout','Mapped listening data onto districts and buildings'],
+      tools:['TypeScript','3D graphics'],
+      links:[['Open live','https://ggps4.github.io/musical-city/'],['Source','https://github.com/GGPS4/musical-city']]},
+    fsae:{k:'Project · Oct 2024 – now',t:'Formula SAE, Suspension Team',m:'Binghamton Formula SAE · Suspension team member',
+      what:'Formula SAE is an SAE International competition where university teams design, build and race a small formula-style car. Teams are judged on engineering design, cost and on-track events.',
+      did:['Designed and developed the car\'s steering system, focusing on precise handling and driver feedback','Worked with the suspension team on geometry, performance and packaging in CAD and simulation','Used ANSYS for structural analysis, Fusion 360 for design and MATLAB for system optimization'],
+      tools:['ANSYS Workbench','Fusion 360','MATLAB'],
+      links:[['Steering Sandbox','https://ggps4.github.io/steering-sandbox/']]},
+    buav:{k:'Project · Feb 2025 – now',t:'Binghamton UAV, Mechatronics',m:'Binghamton Unmanned Aerial Vehicle team · Mechatronics member',
+      what:'BUAV is Binghamton\'s student team that designs, builds and flies unmanned aircraft for competitions.',
+      did:['Design and development of the drone\'s payload delivery system, with a focus on reliability and weight','Modeled and refined the deployment mechanism in Fusion 360','Wrote the MATLAB parachute models used to size canopies and plan drops'],
+      tools:['Fusion 360','MATLAB'],
+      links:[['Parachute model code','https://github.com/GGPS4/buav-parachute']]},
+    veloce:{k:'Internship · Summer 2024',t:'Veloce Planes',m:'Experimental Aircraft Construction Intern · Whiteville, NC',
+      what:'Veloce Planes builds experimental aircraft.',
+      did:['Helped design and install a modified engine with a turbocharger','Manufactured and assembled airplane parts from fiberglass and carbon fiber composites','Operated, maintained and repaired the foam CNC equipment to keep production accurate and running'],
+      tools:['Composites layup','CNC','Powerplant install'],links:[]},
+    voron:{k:'Internship · Summer 2022',t:'Rav Meidmad 3D Printing',m:'3D Printer Construction and Modification Intern · Beit Shemesh, Israel',
+      what:'A 3D printing shop that builds and modifies custom printers.',
+      did:['Built VORON Zero, VORON Switchwire and VORON Trident printers','Created custom printers that print rubber fabric for clothing','Diagnosed, repaired and calibrated printers for mechanical reliability and print precision'],
+      tools:['3D printer builds','Calibration','Troubleshooting'],links:[]},
+    arduino:{k:'Project · Oct – Dec 2024',t:'Arduino Text Adventure',m:'Watson College Arduino Exposition · Team member',
+      what:'A Binghamton Watson College competition where teams build and present Arduino projects to industry professionals and peers.',
+      did:['Designed and built custom wiring for the project','Built an interactive tower that works with a story-based text adventure game','Presented to industry judges, and the team <b>won Best Presentation</b>'],
+      tools:['Arduino','Wiring','Prototyping'],links:[]},
+    busim:{k:'Leadership · Nov 2025 – now',t:'President, BUSIM',m:'Binghamton University Simulation and Interface Mechanics Team · 60+ members',
+      what:'BUSIM is a Binghamton student engineering team focused on simulation and interface mechanics.',
+      did:['Lead both the business and engineering sides of the team, which has more than 60 members','Serve as the team\'s main representative and communicate its initiatives and priorities','Run the executive board: set agendas, chair meetings and assign responsibilities'],
+      tools:['Leadership','Operations','Engineering management'],links:[]},
+    cap:{k:'Leadership · Dec 2019 – now',t:'Civil Air Patrol',m:'2nd Lieutenant and former Cadet Commander · Curtiss-Wright Composite Squadron',
+      what:'Civil Air Patrol is the official civilian auxiliary of the U.S. Air Force. Its cadet program trains young people in leadership, aerospace education and emergency services.',
+      did:['Led a squadron of 45+ cadets as cadet commander, overseeing training and operational readiness','Supervised the full cadet staff','Planned instructional meetings on leadership and team structure'],
+      tools:['Leadership','Training design','Aerospace'],links:[]},
+    bvga:{k:'Leadership · Aug 2024 – now',t:'Fortnite Coordinator, BVGA',m:'Binghamton Video Game Association · 8 players, 2 teams',
+      what:'The Binghamton Video Game Association is the university\'s gaming club, with competitive teams in collegiate esports leagues.',
+      did:['Coordinate 8 players across two teams that both qualified for semifinals','Design practice schedules and handle communication between players','Build training programs for individual growth and team improvement. The teams averaged 54 and 57 points per week','Built the Scrim Planner the teams use'],
+      tools:['Team management','Scheduling','Data tracking'],links:[['Scrim Planner','https://ggps4.github.io/scrim-planner/']]},
+    ymca:{k:'Work · Oct 2022 – now',t:'YMCA',m:'Lifeguard and Swim Instructor · Livingston, NJ',
+      what:'Lifeguarding and swim instruction at the Livingston YMCA.',
+      did:['Keep swimmers safe as a certified lifeguard','Teach swim lessons to a range of ages and skill levels'],
+      tools:['Safety','Instruction'],links:[]}
+  };
+  const dlg=document.getElementById('dlg'), esc=x=>x;
+  function openDetail(key){const d=D[key];if(!d)return;
+    document.getElementById('dlgKicker').textContent=d.k;document.getElementById('dlgTitle').textContent=d.t;document.getElementById('dlgMeta').textContent=d.m;
+    document.getElementById('dlgBody').innerHTML=`<h3>What it is</h3><p>${d.what}</p><h3>What I do</h3><ul>${d.did.map(x=>`<li>${x}</li>`).join('')}</ul><h3>Tools</h3><div>${d.tools.map(t=>`<span class="chip">${t}</span>`).join('')}</div>`+(d.links.length?`<div class="dlg-links">${d.links.map(([l,u])=>`<a class="btn" href="${u}" target="_blank" rel="noopener">${l} ↗</a>`).join('')}</div>`:'');
+    if(dlg.showModal)dlg.showModal();else dlg.setAttribute('open','');}
+  document.querySelectorAll('[data-detail]').forEach(el=>{
+    el.addEventListener('click',e=>{if(e.target.closest('a'))return;openDetail(el.dataset.detail);});
+    if(el.tagName!=='BUTTON')el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openDetail(el.dataset.detail);}});
+  });
+  document.getElementById('dlgClose').addEventListener('click',()=>dlg.close());
+  dlg.addEventListener('click',e=>{if(e.target===dlg)dlg.close();});
   // Project thumbnails
   function rnd(seed){return()=>{seed=(seed*16807)%2147483647;return(seed-1)/2147483646;};}
   const arts={
+    chute(c,w,h){const g=c.createLinearGradient(0,0,0,h);g.addColorStop(0,'#16223a');g.addColorStop(1,'#2a3a55');c.fillStyle=g;c.fillRect(0,0,w,h);
+      c.fillStyle='#3c5a3a';c.fillRect(0,h-18,w,18);c.strokeStyle='#f2e33a';c.setLineDash([4,4]);c.beginPath();c.ellipse(w*.72,h-9,46,7,0,0,7);c.stroke();c.setLineDash([]);
+      [[0,'#1f3bd6'],[1,'#2fd17a'],[2,'#f2e33a'],[3,'#f08a24'],[4,'#e0322b']].forEach(([k,col])=>{c.strokeStyle=col;c.globalAlpha=.8;c.lineWidth=1.6;c.beginPath();c.moveTo(w*.18,h*.12);c.quadraticCurveTo(w*(.3+k*.06),h*.55,w*(.45+k*.1),h-18);c.stroke();});c.globalAlpha=1;
+      const cx=w*.34,cy=h*.36;c.fillStyle='#e8ecf2';c.beginPath();c.ellipse(cx,cy,34,16,0,Math.PI,0);c.fill();c.strokeStyle='#e8ecf2';c.lineWidth=1;[-34,-12,12,34].forEach(dx=>{c.beginPath();c.moveTo(cx+dx,cy);c.lineTo(cx,cy+34);c.stroke();});
+      c.fillStyle='#f08a24';c.fillRect(cx-5,cy+32,10,12);c.fillStyle='#c9d4e6';c.font='500 11px "IBM Plex Mono",monospace';c.fillText('Ø 0.58 m · 3.5–4.5 m/s',14,20);},
     steer(c,w,h){c.fillStyle='#0f1622';c.fillRect(0,0,w,h);c.strokeStyle='rgba(120,150,200,.12)';c.lineWidth=1;for(let x=0;x<w;x+=16){c.beginPath();c.moveTo(x,0);c.lineTo(x,h);c.stroke();}for(let y=0;y<h;y+=16){c.beginPath();c.moveTo(0,y);c.lineTo(w,y);c.stroke();}
       const cy=h*.42,tw=w*.62,L=w/2-tw/2,R=w/2+tw/2,ang=[.34,.24];c.strokeStyle='#e6ebf2';c.lineWidth=4;c.beginPath();c.moveTo(L+18,cy+18);c.lineTo(R-18,cy+18);c.stroke();
       [[L,ang[0]],[R,ang[1]]].forEach(([x,a],i)=>{c.save();c.translate(x,cy);c.rotate(-a);c.fillStyle='#39455a';c.fillRect(-9,-32,18,64);c.restore();
